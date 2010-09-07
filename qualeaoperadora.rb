@@ -14,7 +14,7 @@ class Telefone
         url_captcha = "http://consultanumero.abr.net.br:8080/consultanumero/jcaptcha.jpg?jcid="
 
         ag = Mechanize.new
-        ag.user_agent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; pt-BR; rv:1.8.0.1) Gecko/20060111 Firefox/1.5.0.1"
+        ag.user_agent = "Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Ubuntu/10.04 Chromium/5.0.375.127 Chrome/5"
 
         page = ag.get(url)
         form = page.forms[0]
