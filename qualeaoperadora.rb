@@ -47,13 +47,22 @@ class Telefone
 end
 
 
-get %r{/(\d{10})(.yml)?$} do |numero, is_yaml|
+get %r{/(\d{10})(\..+)?$} do |numero, extensao|
     telefone = Telefone.new(numero)
     @numero = telefone.numero
     @operadora = telefone.operadora
     @logotipo = telefone.logotipo
-    return @operadora if is_yaml
-    haml :operadora
+    case extensao
+        when '.yml', '.yaml'
+            return @operadora
+        when '.json'
+            params[:callback] = 'jsonOperadora' if not params[:callback]
+            jsonp = "#{params[:callback]}({\"operadora\": \"#{@operadora}\",
+                                           \"logotipo\": \"#{@logotipo}\"})"
+            return jsonp
+        else
+            haml :operadora
+    end
 end
 
 get '/' do
