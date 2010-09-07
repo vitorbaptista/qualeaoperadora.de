@@ -47,11 +47,12 @@ class Telefone
 end
 
 
-get %r{/(\d{10})$} do |numero|
+get %r{/(\d{10})(.yml)?$} do |numero, is_yaml|
     telefone = Telefone.new(numero)
     @numero = telefone.numero
     @operadora = telefone.operadora
     @logotipo = telefone.logotipo
+    return @operadora if is_yaml
     haml :operadora
 end
 
