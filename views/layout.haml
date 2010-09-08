@@ -19,6 +19,10 @@
       });
       function formSubmit() {
         telefone = document.getElementById('telefone_input').value;
+        if (telefone.length != 13) {
+          alert('O telefone deve estar no formato "(99)9999.9999".');
+        }
+        telefone = telefone.slice(1, 3).concat(telefone.slice(4,8)).concat(telefone.slice(9,13))
         window.location = '/' + telefone;
         return false;
       }
