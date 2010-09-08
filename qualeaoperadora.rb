@@ -69,10 +69,10 @@ get '/' do
     haml :index
 end
 
-get '/*' do
-    redirect '/'
-end
-
 post '/' do
     Telefone.new(params[:numero]).operadora
+end
+
+not_found do
+    redirect '/'
 end
