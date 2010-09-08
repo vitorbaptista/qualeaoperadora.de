@@ -57,7 +57,7 @@ get %r{/(\d{10})(\..+)?$} do |numero, extensao|
     telefone = Telefone.new(numero)
     @numero = telefone.numero
     @operadora = telefone.operadora
-    @logotipo = "images/#{telefone.logotipo}"
+    @logotipo = "http://qualeaoperadora.de/images/#{telefone.logotipo}"
     case extensao
         when '.yml', '.yaml'
             return @operadora
