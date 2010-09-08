@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'mechanize'
 require 'open-uri'
-require 'haml'
+require 'vendor/haml/lib/haml.rb'
 require 'vendor/sinatra/lib/sinatra.rb'
 
 class Telefone
