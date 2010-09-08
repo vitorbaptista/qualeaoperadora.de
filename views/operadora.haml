@@ -1,5 +1,6 @@
-%p
-  %img{:src => @logotipo, :alt => @operadora}
+- if @operadora != "Desconhecida"
+  %p
+    %img{:src => @logotipo, :alt => @operadora}
 %p
   A operadora de
   %em
