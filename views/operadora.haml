@@ -7,7 +7,10 @@
     = @numero
   é
   %em
-    = @operadora + "."
+    - if @uf
+      = "#{@operadora} (#{@uf})."
+    - else
+      = "#{@operadora}."
 %p
   %a{:href => "/"}
     Quer ver outro número?

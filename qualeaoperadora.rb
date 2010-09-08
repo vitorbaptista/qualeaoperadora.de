@@ -5,10 +5,11 @@ require 'vendor/haml/lib/haml.rb'
 require 'vendor/sinatra/lib/sinatra.rb'
 
 class Telefone
-    attr_reader :numero, :operadora
+    attr_reader :ddd, :numero, :operadora
     def initialize(numero)
         @numero = numero
-        @numero = "(#{numero[0..1]})#{numero[2..5]}.#{numero[6..-1]}" if numero.length < 13
+        @ddd = numero[0..1]
+        @numero = "(#{@ddd})#{numero[2..5]}.#{numero[6..-1]}" if numero.length < 13
 
         url = "http://consultanumero.abr.net.br:8080/consultanumero/consulta/consultaSituacaoAtual!carregar.action"
         url_captcha = "http://consultanumero.abr.net.br:8080/consultanumero/jcaptcha.jpg?jcid="
@@ -50,11 +51,44 @@ class Telefone
         return "sercomtel.jpg"   if @operadora =~ /Sercomtel/i
         return "telefonica.jpg"  if @operadora =~ /Telefonica/i
     end
+
+    def uf
+        case @ddd.to_i
+        when 11..19: "SP"
+        when 21, 22, 24: "RJ"
+        when 27, 28: "ES"
+        when 31..35, 37, 38: "MG"
+        when 41..46: "PR"
+        when 47..49: "SC"
+        when 51, 53..55: "RS"
+        when 61: "DF"
+        when 62, 64: "GO"
+        when 63: "TO"
+        when 65, 66: "MT"
+        when 67: "MS"
+        when 68: "AC"
+        when 69: "RO"
+        when 71, 73..75, 77: "BA"
+        when 79: "SE"
+        when 81, 87: "PE"
+        when 82: "AL"
+        when 83: "PB"
+        when 84: "RN"
+        when 85, 88: "CE"
+        when 86, 89: "PI"
+        when 91, 93, 94: "PA"
+        when 92, 97: "AM"
+        when 95: "RR"
+        when 96: "AP"
+        when 98, 99: "MA"
+        end
+    end
 end
 
 
 get %r{/(\d{10})(\..+)?$} do |numero, extensao|
     telefone = Telefone.new(numero)
+    @uf = telefone.uf
     @numero = telefone.numero
     @operadora = telefone.operadora
     @logotipo = "http://qualeaoperadora.de/images/#{telefone.logotipo}"
@@ -64,7 +98,8 @@ get %r{/(\d{10})(\..+)?$} do |numero, extensao|
         when '.json'
             params[:callback] = 'jsonOperadora' if not params[:callback]
             jsonp = "#{params[:callback]}({\"operadora\": \"#{@operadora}\",
-                                           \"logotipo\": \"#{@logotipo}\"})"
+                                           \"logotipo\": \"#{@logotipo}\",
+                                           \"uf\": \"#{@uf}\"})"
             return jsonp
         else
             haml :operadora
