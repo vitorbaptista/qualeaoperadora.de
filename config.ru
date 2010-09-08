@@ -5,4 +5,4 @@ set :run, false
 set :environmet, :production
 
 require 'qualeaoperadora.rb'
-run Sinatra.application
+run Sinatra::Application
