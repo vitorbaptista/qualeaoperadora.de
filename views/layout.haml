@@ -12,14 +12,14 @@
       .domain{font-weight:bold;}
       a.adlink{color: orange;}
       #container{clear:both;font-size:3em;margin:auto;}
-      #numero_input{width:172px;}
+      #telefone_input{width:172px;}
     :javascript
       $(document).ready(function() {
-        $("#numero_input").mask("(99)9999.9999");
+        $("#telefone_input").mask("(99)9999.9999");
       });
       function formSubmit() {
-        domain = document.getElementById('numero_input').value;
-        window.location = '/' + domain;
+        telefone = document.getElementById('telefone_input').value;
+        window.location = '/' + telefone;
         return false;
       }
     %title
