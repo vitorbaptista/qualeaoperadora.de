@@ -39,10 +39,16 @@ class Telefone
     end
 
     def logotipo
-        return "images/oi.jpg"    if @operadora =~ /Oi/i
-        return "images/tim.jpg"   if @operadora =~ /Tim/i
-        return "images/vivo.jpg"  if @operadora =~ /Vivo/i
-        return "images/claro.jpg" if @operadora =~ /Claro/i
+        return "oi.jpg"          if @operadora =~ /Oi/i
+        return "tim.jpg"         if @operadora =~ /Tim/i
+        return "gvt.jpg"         if @operadora =~ /GVT/i
+        return "ctbc.jpg"        if @operadora =~ /CTBC/i
+        return "vivo.jpg"        if @operadora =~ /Vivo/i
+        return "claro.jpg"       if @operadora =~ /Claro/i
+        return "tleste.jpg"      if @operadora =~ /T-Leste/i
+        return "embratel.jpg"    if @operadora =~ /Embratel/i
+        return "sercomtel.jpg"   if @operadora =~ /Sercomtel/i
+        return "telefonica.jpg"  if @operadora =~ /Telefonica/i
     end
 end
 
@@ -51,7 +57,7 @@ get %r{/(\d{10})(\..+)?$} do |numero, extensao|
     telefone = Telefone.new(numero)
     @numero = telefone.numero
     @operadora = telefone.operadora
-    @logotipo = telefone.logotipo
+    @logotipo = "images/#{telefone.logotipo}"
     case extensao
         when '.yml', '.yaml'
             return @operadora
