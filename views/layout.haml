@@ -11,6 +11,9 @@
       input[type=text]{border:1px solid #ccc;color:#333;font-size:1em;padding:4px 6px 4px 6px;}
       #container{clear:both;font-size:3em;margin:auto;}
       #telefone_input{width:200px;}
+      #assinatura{position:absolute;bottom:5%;right:3%;width:100%;font-size:1.5em;text-align:right;}
+      a.assinatura{color: #333;text-decoration:none;}
+      a:hover.assinatura{text-decoration:underline;}
     :javascript
       $(document).ready(function() {
         $("#telefone_input").mask("(99)9999.9999");
@@ -40,3 +43,6 @@
   %body
     #container
       = yield
+    #assinatura
+      %a{:href => 'http://twitter.com/vitorbaptista', :class => 'assinatura'}
+        @vitorbaptista
