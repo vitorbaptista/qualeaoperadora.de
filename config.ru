@@ -1,10 +1,8 @@
 require 'rubygems'
 require 'vendor/sinatra/lib/sinatra.rb'
 
-Sinatra::Application.default_options.merge!(
-  :run => false,
-  :env => :production
-)
+set :run, false
+set :environmet, :production
 
 require 'qualeaoperadora.rb'
 run Sinatra.application
