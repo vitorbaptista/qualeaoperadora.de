@@ -35,7 +35,7 @@ class Telefone
             @operadora = @operadora.unpack('C*').pack('U*')
         end
 
-        @operadora = "Desconhecida" if not operadora_end or operadora =~ /t[br].*/
+        @operadora = "desconhecida" if not operadora_end or operadora =~ /t[br].*/
     end
 
     def logotipo
