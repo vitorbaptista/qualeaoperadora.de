@@ -13,7 +13,7 @@ class Telefone
         url = "http://consultanumero.abr.net.br:8080/consultanumero/consulta/consultaSituacaoAtual!carregar.action"
         url_captcha = "http://consultanumero.abr.net.br:8080/consultanumero/jcaptcha.jpg?jcid="
 
-        ag = Mechanize.new
+        ag = WWW::Mechanize.new
         ag.user_agent = "Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Ubuntu/10.04 Chromium/5.0.375.127 Chrome/5"
 
         page = ag.get(url)
