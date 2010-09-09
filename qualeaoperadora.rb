@@ -96,16 +96,20 @@ get %r{/(\d{10})(\..+)?$} do |numero, extensao|
     @numero = telefone.numero
     @operadora = telefone.operadora
     @logotipo = "http://qualeaoperadora.de/images/#{telefone.logotipo}"
+    print "[#{Time.new.utc}] #{@numero} => #{@operadora} (#{@uf})"
     case extensao
         when '.yml', '.yaml'
+            puts ' [yml]'
             return @operadora
         when '.json'
+            puts ' [json]'
             params[:callback] = 'jsonOperadora' if not params[:callback]
             jsonp = "#{params[:callback]}({\"operadora\": \"#{@operadora}\",
                                            \"logotipo\": \"#{@logotipo}\",
                                            \"uf\": \"#{@uf}\"})"
             return jsonp
         else
+            puts ' [html]'
             haml :operadora
     end
 end
