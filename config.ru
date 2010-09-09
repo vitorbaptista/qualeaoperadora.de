@@ -1,9 +1,10 @@
 require 'rubygems'
 require 'vendor/sinatra/lib/sinatra.rb'
 
-log = File.new('log/sinatra.log', 'w+')
-STDOUT.reopen(log)
-STDERR.reopen(log)
+log_stdout = File.new('log/sinatra-stdout.log', 'a')
+log_stderr = File.new('log/sinatra-stderr.log', 'a')
+STDOUT.reopen(log_stdout)
+STDERR.reopen(log_stderr)
 
 set :run, false
 set :environment, :production
