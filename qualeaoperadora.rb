@@ -28,11 +28,7 @@ class Telefone
         form['nmTelefone'] = @numero
         form['j_captcha_response'] = captcha_text
 
-        params = { 'nmTelefone' => form['nmTelefone'],
-                   'j_captcha_response'=> form['j_captcha_response'],
-                   'jcid' => form['jcid'], 'method:consultar' => 'Consultar' }
-
-        page = ag.post(url, params, 'Cookie' => "JSESSIONID=#{form['j_captcha_response']}").body
+        page = `curl -d "nmTelefone=#{form['nmTelefone']}&j_captcha_response=#{form['j_captcha_response']}&jcid=#{form['jcid']}&method:consultar=Consultar" -b "JSESSIONID=#{form['j_captcha_response']}" #{url}`
 
         operadora_end = page[4462..4480] =~ /</
         if operadora_end
